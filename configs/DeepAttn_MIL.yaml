@@ -1,0 +1,64 @@
+General:
+    MODEL_NAME: DeepAttn_MIL
+    seed: 2024
+    num_classes: 2
+    num_epochs: 100
+    device: 0
+    num_workers: 4
+    best_model_metric: macro_auc  
+    earlystop: 
+        use: False
+        patience: 15
+        metric: macro_auc
+
+Dataset:
+    DATASET_NAME: TCGA_LUAD
+    # to use train-val-test, open dataset_csv_dir
+    # to use k-fold train-val/k-fold train-val then test, open dataset_root_dir
+    
+    #dataset_csv_path: datasets/Stanford_Dataset.csv
+    dataset_root_dir: datasets/TCGA_LUAD/TCGA_LUAD_CLAM_uni
+    feature_extractor: uni
+    
+    balanced_sampler:
+        use: False
+        replacement: True
+
+Logs:
+    log_root_dir: logs/CLAM
+
+Model:
+    in_dim: 1024
+    embedding_dim: 64
+    attention_dim: 32
+    fc_dim: 32
+    cluster_num: 10
+    dropout: 0.5
+    act: relu
+    l1_lambda: 0.00001
+    
+    optimizer:
+        which: adam
+        adam_config:
+            lr: 0.0001
+            weight_decay: 0.0005
+        adamw_config:
+            lr: 0.0001
+            weight_decay: 0.0005
+    
+    criterion: ce  
+    
+    scheduler:
+        warmup: 5
+        which: step  # Change from 'plateau' to 'step'
+        step_config:
+            step_size: 30
+            gamma: 0.5
+        multi_step_config:
+            milestones: [30, 60, 90]
+            gamma: 0.5
+        exponential_config:
+            gamma: 0.95
+        cosine_config:
+            T_max: 50
+            eta_min: 0.000001
