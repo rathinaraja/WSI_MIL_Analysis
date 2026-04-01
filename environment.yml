@@ -1,0 +1,47 @@
+name: wsi_mil_classification
+
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - pip
+
+  # Core scientific stack
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - h5py
+
+  # Deep learning
+  - pytorch
+  - torchvision
+
+  # Image + plotting
+  - pillow
+  - opencv
+  - matplotlib 
+  - openslide-python
+
+  # Utilities
+  - tqdm
+  - pyyaml 
+
+  - pip: 
+      - tensorboard
+      - addict
+      - ruamel.yaml
+      - h5py
+      - einops
+      - torch_geometric
+      - timm
+      - transformers
+      - huggingface-hub
+      - open_clip_torch
+      - causal_conv1d
+      - mmcv-full
+      - easydict
